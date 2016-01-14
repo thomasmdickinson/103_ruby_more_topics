@@ -76,4 +76,44 @@ class TodoList
     end
     selected_items
   end
+
+  def find_by_title(str)
+    select { |item| item.title == str }.first
+  end
+
+  def all_done
+    select { |item| item.done? }
+  end
+
+  def all_not_done
+    select { |item| !item.done? }
+  end
+
+  def mark_done(str)
+    find_by_title(str).done!
+  end
+
+  def mark_all_done
+    each { |item| item.done! }
+  end
+
+  def mark_all_undone
+    each { |item| item.undone! }
+  end
 end
+
+
+require_relative 'todo_list'
+
+todo1 = Todo.new("Buy milk")
+todo2 = Todo.new("Clean room")
+todo3 = Todo.new("Go to gym")
+
+list = TodoList.new("Today's Todos")
+list.add(todo1)
+list.add(todo2)
+list.add(todo3)
+
+todo1.done!
+
+binding.pry
