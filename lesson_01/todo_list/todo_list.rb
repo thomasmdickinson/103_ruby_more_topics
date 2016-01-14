@@ -66,5 +66,14 @@ class TodoList
 
   def each
     @todos.each { |item| yield item }
+    self
+  end
+
+  def select
+    selected_items = TodoList.new(title)
+    @todos.each do |item|
+      selected_items << item if yield(item)
+    end
+    selected_items
   end
 end
