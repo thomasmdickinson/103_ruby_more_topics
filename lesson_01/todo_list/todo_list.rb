@@ -63,4 +63,8 @@ class TodoList
     puts "---- #{@title} ----"
     @todos.each { |item| puts item }
   end
+
+  def each
+    @todos.each { |item| yield item }
+  end
 end
